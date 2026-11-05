@@ -231,7 +231,7 @@ if ($result) {
       <a href="orders.php" class="nav-link">Orders</a>
       <a href="products.php" class="nav-link">Products</a>
       <a href="banner.php" class="nav-link active">Banner</a>
-      <a href="finance.php" class="nav-link">Finance</a>
+      <a href="<?= htmlspecialchars($financeUrl) ?>" class="nav-link">Finance</a>
       <a href="orders.php?logout=1" class="nav-link logout-link">Log out</a>
     </nav>
   </div>
@@ -246,7 +246,7 @@ if ($result) {
     <a href="orders.php" class="sidebar-link">Orders</a>
     <a href="products.php" class="sidebar-link">Products</a>
     <a href="banner.php" class="sidebar-link active">Banner</a>
-    <a href="finance.php" class="sidebar-link">Finance</a>
+    <a href="<?= htmlspecialchars($financeUrl) ?>" class="sidebar-link">Finance</a>
     <a href="orders.php?logout=1" class="sidebar-link logout">Log out</a>
   </aside>
   <script>

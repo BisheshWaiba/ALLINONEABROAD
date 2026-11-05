@@ -15,6 +15,9 @@ $dbName = getenv('DB_NAME') ?: 'allinoneabroad';
 $dbUser = getenv('DB_USER') ?: 'root';
 $dbPass = getenv('DB_PASS') ?: '';
 $adminPassword = getenv('ADMIN_PASSWORD') ?: null;
+// Where the admin "Finance" menu link goes. Set FINANCE_APP_URL in config.local.php
+// to send it to the external Finance app; unset, it uses the built-in finance.php.
+$financeUrl = getenv('FINANCE_APP_URL') ?: 'finance.php';
 
 function connectDb(): mysqli
 {

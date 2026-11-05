@@ -187,7 +187,7 @@ $paymentBadgeColors = [
       <a href="orders.php" class="nav-link active">Orders</a>
       <a href="products.php" class="nav-link">Products</a>
       <a href="banner.php" class="nav-link">Banner</a>
-      <a href="finance.php" class="nav-link">Finance</a>
+      <a href="<?= htmlspecialchars($financeUrl) ?>" class="nav-link">Finance</a>
       <a href="?logout=1" class="logout-link">Log out</a>
     </nav>
   </div>
@@ -202,7 +202,7 @@ $paymentBadgeColors = [
     <a href="orders.php" class="sidebar-link active">Orders</a>
     <a href="products.php" class="sidebar-link">Products</a>
     <a href="banner.php" class="sidebar-link">Banner</a>
-    <a href="finance.php" class="sidebar-link">Finance</a>
+    <a href="<?= htmlspecialchars($financeUrl) ?>" class="sidebar-link">Finance</a>
     <a href="?logout=1" class="sidebar-link logout">Log out</a>
   </aside>
   <script>
