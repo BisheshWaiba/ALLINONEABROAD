@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['formAction'] ?? '') === 'c
 $addResult = null;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['formAction'] ?? '') === 'add_product') {
-    $allowedCategories = ['luggage', 'kitchen', 'appliances'];
+    $allowedCategories = ['luggage', 'kitchen', 'appliances', 'grocery'];
     $allowedExt = ['jpg' => 'image/jpeg', 'jpeg' => 'image/jpeg', 'png' => 'image/png', 'webp' => 'image/webp', 'gif' => 'image/gif'];
     $maxBytes = 5 * 1024 * 1024;
 
@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['formAction'] ?? '') === 'a
     if ($name === '') {
         $error = 'Product name is required.';
     } elseif (!in_array($category, $allowedCategories, true)) {
-        $error = 'Category must be luggage, kitchen, or appliances.';
+        $error = 'Category must be luggage, kitchen, appliances, or grocery.';
     } elseif ($price === null || $price <= 0) {
         $error = 'Price must be a positive number.';
     } elseif ($stock === null || $stock < 0) {
@@ -126,7 +126,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['formAction'] ?? '') === 'a
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['stockFile'])) {
     $results = ['added' => 0, 'updated' => 0, 'errors' => []];
     $file = $_FILES['stockFile'];
-    $allowedCategories = ['luggage', 'kitchen', 'appliances'];
+    $allowedCategories = ['luggage', 'kitchen', 'appliances', 'grocery'];
 
     if ($file['error'] !== UPLOAD_ERR_OK) {
         $results['errors'][] = 'Upload failed. Please choose a file and try again.';
@@ -177,7 +177,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['stockFile'])) {
                         $pieceType = in_array($pieceType, ['set', 'single'], true) ? $pieceType : null;
 
                         if ($name === '' || !in_array($category, $allowedCategories, true) || $price === null || $price <= 0 || $stock === null || $stock < 0 || $image === '') {
-                            $results['errors'][] = "Row $rowNum ($name): invalid or missing value — check name, category (luggage/kitchen/appliances), price, stock, and image.";
+                            $results['errors'][] = "Row $rowNum ($name): invalid or missing value — check name, category (luggage/kitchen/appliances/grocery), price, stock, and image.";
                             continue;
                         }
 
@@ -364,6 +364,20 @@ if ($result) {
 
     <div class="panel">
       <div class="panel-head">
+        <h2>Sync from Finance</h2>
+        <form method="post" action="sync_finance.php" style="margin:0;">
+          <button type="submit" class="btn">Sync now</button>
+        </form>
+      </div>
+      <div class="panel-body">
+        <div class="help-text" style="margin-top:0;">
+          Copies your Finance products to the website: new ones are added, and <strong>price</strong> and <strong>stock</strong> are updated on existing ones. Photos, descriptions and badges you set here are never changed. New products use the logo as a placeholder photo.
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head">
         <h2>Import Stock from Spreadsheet</h2>
         <a href="products_template.csv" class="btn btn-outline" download>⬇ Download CSV Template</a>
       </div>
@@ -390,7 +404,7 @@ if ($result) {
 
         <div class="help-text">
           Upload a <code>.csv</code> file (export from Excel or Google Sheets as CSV — not <code>.xlsx</code>).<br/>
-          Required columns: <code>name</code>, <code>category</code> (must be <code>luggage</code>, <code>kitchen</code>, or <code>appliances</code>), <code>price</code>, <code>stock</code>, <code>image</code>.<br/>
+          Required columns: <code>name</code>, <code>category</code> (must be <code>luggage</code>, <code>kitchen</code>, <code>appliances</code>, or <code>grocery</code>), <code>price</code>, <code>stock</code>, <code>image</code>.<br/>
           Optional columns: <code>original_price</code> (for showing a discount), <code>description</code>, <code>badge</code> (e.g. "Best Seller"), <code>rating</code> (1–5), <code>reviews</code>, <code>images</code> (extra gallery photos), <code>colors</code>, <code>country_of_origin</code>, <code>piece_type</code> (<code>set</code> or <code>single</code> — shown clearly to customers on the product page).<br/>
           For <code>image</code> and <code>images</code>, use either a filename already uploaded to <code>images/products/</code> (e.g. <code>my-photo.jpg</code>) or a full <code>https://</code> image URL. For <code>images</code> (extra gallery photos) and <code>colors</code>, separate multiple values with <code>|</code> (pipe), e.g. <code>photo2.jpg|photo3.jpg</code> or <code>Mint|Ocean Blue|Black</code>.<br/>
           Re-uploading a spreadsheet updates existing products that match by name, and adds any new ones — nothing is deleted automatically.
@@ -422,6 +436,7 @@ if ($result) {
                 <option value="luggage">Luggage</option>
                 <option value="kitchen">Kitchen</option>
                 <option value="appliances">Home Appliances</option>
+                <option value="grocery">Grocery</option>
               </select>
             </div>
             <div class="form-group"><label>Price (Rs.) *</label><input type="number" name="price" min="0.01" step="0.01" required/></div>

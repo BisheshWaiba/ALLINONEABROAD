@@ -66,6 +66,7 @@ if ($product) {
       <a href="shop.html?cat=luggage" data-cat="luggage">Luggage</a>
       <a href="shop.html?cat=kitchen" data-cat="kitchen">Kitchen</a>
       <a href="shop.html?cat=appliances" data-cat="appliances">Home Appliances</a>
+      <a href="shop.html?cat=grocery" data-cat="grocery">Grocery</a>
       <a href="shop.html" data-cat="all">All Products</a>
     </nav>
     <div class="header-actions">
@@ -78,6 +79,7 @@ if ($product) {
   <div class="mobile-nav" id="mobileNav">
     <a href="shop.html?cat=luggage">Luggage</a><a href="shop.html?cat=kitchen">Kitchen</a>
     <a href="shop.html?cat=appliances">Home Appliances</a>
+    <a href="shop.html?cat=grocery">Grocery</a>
     <a href="shop.html">All Products</a><a href="wishlist.html">Wishlist</a><a href="login.html">Sign In</a>
   </div>
 </header>

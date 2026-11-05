@@ -19,6 +19,13 @@ $adminPassword = getenv('ADMIN_PASSWORD') ?: null;
 // to send it to the external Finance app; unset, it uses the built-in finance.php.
 $financeUrl = getenv('FINANCE_APP_URL') ?: 'finance.php';
 
+// Finance -> website product sync (sync_finance.php). Credentials belong in config.local.php.
+$financeSupabaseUrl = getenv('FINANCE_SUPABASE_URL') ?: null;
+$financeSupabaseKey = getenv('FINANCE_SUPABASE_ANON_KEY') ?: null;
+$financeEmail = getenv('FINANCE_EMAIL') ?: null;
+$financePassword = getenv('FINANCE_PASSWORD') ?: null;
+$financeSyncToken = getenv('FINANCE_SYNC_TOKEN') ?: null; // lets a cron job call sync_finance.php
+
 function connectDb(): mysqli
 {
     global $dbHost, $dbName, $dbUser, $dbPass;

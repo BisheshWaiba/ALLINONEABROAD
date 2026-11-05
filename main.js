@@ -434,7 +434,8 @@ function renderShop() {
     luggage: { t: 'Luggage & Bags', d: 'Trolleys, backpacks & sets built for international travel.' },
     kitchen: { t: 'Kitchen Essentials', d: 'Pressure cookers, induction cooktops, tiffins & masala dabbas.' },
     appliances: { t: 'Home Appliances', d: 'Small appliances and gadgets for your new home abroad.' },
-    all:     { t: 'All Products', d: 'Everything you need — luggage, kitchen and home appliances.' },
+    grocery: { t: 'Grocery', d: 'Everyday food and pantry items.' },
+    all:     { t: 'All Products', d: 'Everything you need — luggage, kitchen, home appliances and grocery.' },
   };
   if (titleEl) titleEl.textContent = q ? `Search results for "${q}"` : (catMap[cat]?.t || 'All Products');
   if (descEl) descEl.textContent = catMap[cat]?.d || '';
